@@ -17,3 +17,7 @@ export const goToRestaurantDetails = (navigate,restaurantId) => {
 export const goToCart = (navigate) => {
     navigate(`/active-order`)
 }
+
+export const Address = (navigate) => {
+    navigate("/Address")
+}

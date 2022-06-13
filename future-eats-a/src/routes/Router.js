@@ -6,6 +6,7 @@ import { Home } from "../pages/Home";
 import { ErrorPage } from "../pages/ErrorPage";
 import { RestaurantDetails } from "../pages/RestaurantDetails";
 import { Cart } from "../pages/Cart";
+import { Address } from "../pages/Address";
 
 export const Router = () => {
     return(
@@ -14,6 +15,7 @@ export const Router = () => {
                 <Route index element={<Login/>}/>
                 <Route path={"*"} element={<ErrorPage/>}/>
                 <Route path={"/signup"} element={<SignUp/>}/>
+                <Route path={"/address"} element={<Address/>}/>
                 <Route path={"/home"} element={<Home/>}/>
                 <Route path={"/restaurants/:restaurantId"} element={<RestaurantDetails/>}/>
                 <Route path={"/active-order"} element={<Cart/>}/>

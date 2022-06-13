@@ -19,3 +19,23 @@ export const requestLogin = (form, navigate, clear) => {
         clear()
     })
 }
+
+export const requestSignUp = (form, navigate, clear) => {
+    const body = {
+        name: form.name,
+        email: form.email,
+        cpf: form.cpf,
+        password: form.password
+    }
+    axios.post(`${BASE_URL}/${APP_NAME}/signup`, body)
+    .then((res) => {
+       localStorage.setItem("token", res.data.token)
+       localStorage.setItem("email", form.email)
+       alert("Usuário cadastrado com sucesso!")
+       goToHome(navigate)
+    })
+    .catch((err) => {
+        alert("Erro! Tente novamente.")
+        clear()
+    })
+}
