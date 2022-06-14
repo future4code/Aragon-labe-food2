@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../assets/img/logo.png'
+import logo from '../assets/img/logo-branca.png'
 import { useUnprotectedPage } from "../hooks/useUnprotectedPage";
 import { goToLogin } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +18,9 @@ export const InitialPage = () => {
         <Stack
             alignItems='center'
         >
-        <div>
             <img src={logo} width={"150px"} alt="Future Eats Logo"/>
             <br/>
             <CircularProgress style={{"color": "#5CB646"}} size={50}/>
-        </div>
         </Stack>
     )
 }
