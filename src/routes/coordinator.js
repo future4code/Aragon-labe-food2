@@ -18,6 +18,10 @@ export const goToCart = (navigate) => {
     navigate(`/active-order`)
 }
 
-export const Address = (navigate) => {
-    navigate("/Address")
+export const goToAddress = (navigate) => {
+    navigate("/address")
+}
+
+export const goToFeed = (navigate) => {
+    navigate("/restaurants")
 }

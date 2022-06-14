@@ -39,3 +39,15 @@ export const requestSignUp = (form, navigate, clear) => {
         clear()
     })
 }
+
+export const requestAddress = (form, navigate, clear) => {
+    const body = {
+        street: form.street,
+        number: form.number,
+        neighbourhood: form.neighbourhood,
+        city: form.city,
+        state: form.state,
+        complement: form.complement,
+    }
+    axios.put(`${BASE_URL}/${APP_NAME}/address`, body)
+}

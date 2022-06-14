@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Address = () => {
+export const RestaurantCard = () => {
     return(
         <>
-        <p> Sou endereço </p>
+        <p> sou restaurant </p>
         </>
     )
 }
