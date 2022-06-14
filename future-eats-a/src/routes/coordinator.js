@@ -1,10 +1,14 @@
-export const goToHome = (navigate) => {
-    navigate("/home")
+export const goToInitialPage = (navigate) => {
+    navigate("/")
 };
 
 export const goToLogin = (navigate) => {
-    navigate("/")
+    navigate("/login")
 };
+
+export const goToFeed = (navigate) => {
+    navigate("/feed")
+}
 
 export const goToSignUp = (navigate) => {
     navigate("/signup")
