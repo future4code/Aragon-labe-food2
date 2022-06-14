@@ -1,9 +1,9 @@
 import React from "react";
 
-export const SignUp = () => {
+export const RestaurantCard = () => {
     return(
         <>
-        <p> Sou cadastro </p>
+        <p> sou restaurant </p>
         </>
     )
 }
