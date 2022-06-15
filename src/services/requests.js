@@ -1,5 +1,5 @@
 import { APP_NAME, BASE_URL } from "../constants/urls"
-import { goToFeed, goToHome } from "../routes/coordinator"
+import { goToAddress, goToRestaurants } from "../routes/coordinator"
 import axios from "axios"
 import { GlobalState } from "../global/GlobalState"
 import { useContext } from "react"
@@ -29,12 +29,13 @@ export const requestSignUp = (form, navigate, clear) => {
         cpf: form.cpf,
         password: form.password
     }
+    console.log(form)
     axios.post(`${BASE_URL}/${APP_NAME}/signup`, body)
     .then((res) => {
        localStorage.setItem("token", res.data.token)
        localStorage.setItem("email", form.email)
        alert("Usuário cadastrado com sucesso!")
-       goToHome(navigate)
+       goToAddress(navigate)
     })
     .catch((err) => {
         alert("Erro! Tente novamente.")
@@ -42,7 +43,7 @@ export const requestSignUp = (form, navigate, clear) => {
     })
 }
 
-export const requestAddress = (form, navigate, clear) => {
+export const requestAddress = (form, navigate) => {
 
     const headers = {
         headers: {
@@ -59,9 +60,9 @@ export const requestAddress = (form, navigate, clear) => {
     }
     axios.put(`${BASE_URL}/${APP_NAME}/address`, body, headers)
     .then((res) =>{
-        clear()
-        goToFeed(navigate)
-        // localStorage.setItem('token', res.data)
+        localStorage.setItem('token', res.data.token)
+        alert("Endereço cadastrado com sucesso")
+        goToRestaurants(navigate)
     })
     .catch((err)=>{
         console.log(err.message)

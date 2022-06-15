@@ -4,7 +4,7 @@ import { useForm } from "../hooks/useForm";
 import { requestLogin } from "../services/requests";
 import logo from "../assets/img/logo.png";
 import { useUnprotectedPage } from "../hooks/useUnprotectedPage";
-import { goToAddress, goToFeed, goToSignUp } from "../routes/coordinator";
+import { goToAddress, goToSignUp } from "../routes/coordinator";
 import { Button, TextField } from "@mui/material";
 import { VisibilityOff } from "@mui/icons-material";
 import userEvent from "@testing-library/user-event";
@@ -19,9 +19,23 @@ export const Login = () => {
     const login = (e) => {
         e.preventDefault()
         requestLogin(form, navigate, clear)
+    //     // return addressToken !== null
+    // //   ? goToRestaurants(navigate)
+    // //   : goToSignUpAdressPage(navigate)
+    // }
+
+        // useEffect(() => {
+        //     const hasAdddress = 
+        //     if ( addressToken === true ) {
+        //         goToRestaurants(navigate)
+        //     } else {
+        //         goToAddress(navigate)
+        //     }
+        // })
     }
 
-    return(
+
+   return(
         <main>
         <img src={logo} width={"150px"} alt="logo"/>
         <h2>LOGIN</h2>

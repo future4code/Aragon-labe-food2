@@ -1,7 +1,7 @@
 import { IconButton, Stack } from "@mui/material";
 import { Home } from "@mui/icons-material";
 import React from "react";
-import { goToCart, goToFeed, goToProfile } from "../routes/coordinator";
+import { goToCart, goToProfile, goToRestaurants } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import cart from '../assets/icons/cart.png'
 import avatar from '../assets/icons/avatar.png'
@@ -18,7 +18,7 @@ export const Footer = () => {
                 margin:'0 2vw'
             }}
         >
-        <IconButton onClick={()=> goToFeed(navigate)}>
+        <IconButton onClick={()=> goToRestaurants(navigate)}>
             <img src={homepage} width="20vw"/>
         </IconButton>
         <IconButton onClick={()=> goToCart(navigate)}>

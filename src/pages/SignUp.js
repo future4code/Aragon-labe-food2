@@ -10,15 +10,16 @@ import { Header } from "../components/Header";
 export const SignUp = () => {
   useUnprotectedPage();
   const navigate = useNavigate();
-  const { form, clear, onChange } = useForm({
+  const { form, onChange, clear } = useForm({
     name: "",
     email: "",
     password: "",
+    cpf: ""
   });
 
   const signup = (e) => {
     e.preventDefault();
-    requestSignUp(form, clear, navigate);
+    requestSignUp(form, navigate, clear);
   };
   return (
     <>

@@ -5,7 +5,7 @@ export const RestaurantCard = (props) => {
 
     return(
         <>
-        <img src={logoUrl}/>
+        <img src={logoUrl} alt="logo-restaurante"/>
         <h2>{name}</h2>
         <p>{deliveryTime}</p>
         <p>R${shipping.toFixed(2)}</p>

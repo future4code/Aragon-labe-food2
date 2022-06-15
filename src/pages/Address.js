@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
-import { useUnprotectedPage } from "../hooks/useUnprotectedPage";
-import { goToFeed } from "../routes/coordinator";
+import { goToRestaurants } from "../routes/coordinator";
 import { requestAddress } from "../services/requests";
 import { TextField, Button } from "@mui/material";
 import logo from "../assets/img/logo.png";
+import { useProtectedPage } from "../hooks/useProtectedPage";
 
 export const Address = () => {
-  useUnprotectedPage();
+  useProtectedPage();
   const navigate = useNavigate();
   const { form, onChange, clear } = useForm({
     street: "",
@@ -112,7 +112,7 @@ export const Address = () => {
       <section>
         <Button
           sx={{ textDecoration: "underline", color: "#000000" }}
-          onClick={() => goToFeed(navigate)}
+          onClick={() => goToRestaurants(navigate)}
         ></Button>
       </section>
     </main>

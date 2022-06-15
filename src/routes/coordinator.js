@@ -22,7 +22,7 @@ export const goToAddress = (navigate) => {
     navigate("/address")
 }
 
-export const goToFeed = (navigate) => {
+export const goToRestaurants = (navigate) => {
     navigate("/restaurants")
 }
 
