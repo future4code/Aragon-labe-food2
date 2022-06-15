@@ -22,7 +22,7 @@ export const GlobalState = (props) => {
         axios
         .get(`${BASE_URL}/${APP_NAME}/restaurants`, headers)
         .then((res) => {
-            setRestaurants(res.data)
+            setRestaurants(res.data.restaurants)
         })
         .catch((err) => {
             alert("Error! Can't load the restaurants list")

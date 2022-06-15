@@ -11,5 +11,5 @@ export const useProtectedPage = () => {
         if (!token) {
             goToLogin(navigate)
         }
-    })
+    }, [])
 };

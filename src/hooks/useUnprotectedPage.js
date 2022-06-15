@@ -11,5 +11,5 @@ export const useUnprotectedPage = () => {
         if (token) {
             goToRestaurants(navigate)
         }
-    })
+    }, [])
 }
