@@ -3,7 +3,7 @@ export const goToHome = (navigate) => {
 };
 
 export const goToLogin = (navigate) => {
-    navigate("/")
+    navigate("/login")
 };
 
 export const goToSignUp = (navigate) => {
@@ -24,4 +24,8 @@ export const goToAddress = (navigate) => {
 
 export const goToFeed = (navigate) => {
     navigate("/restaurants")
+}
+
+export const goToProfile = (navigate) => {
+    navigate('/profile')
 }

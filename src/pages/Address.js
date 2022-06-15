@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
 import { useUnprotectedPage } from "../hooks/useUnprotectedPage";
@@ -19,16 +19,18 @@ export const Address = () => {
     complement: "",
   });
 
-  const address = (e) => {
+  const [ address, setAddress ] = useState(false)
+
+  const registerAddress = (e) => {
     e.preventDefault();
-    requestAddress(form, navigate, clear);
-    goToFeed(navigate);
+    requestAddress(form, navigate, clear);   
   };
+
   return (
     <main>
       <img src={logo} width={"150px"} alt="logo" />
       <h2>MEU ENDEREÇO</h2>
-      <form onSubmit={address}>
+      <form onSubmit={registerAddress}>
         <TextField
           label={"Logradouro"}
           placeholder="Rua / Av."

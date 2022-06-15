@@ -1,9 +1,14 @@
 import React from "react";
 
-export const RestaurantCard = () => {
+export const RestaurantCard = (props) => {
+    const { logoUrl, name, deliveryTime, shipping } = props.restaurant;
+
     return(
         <>
-        <p> sou restaurant </p>
+        <img src={logoUrl}/>
+        <h2>{name}</h2>
+        <p>{deliveryTime}</p>
+        <p>R${shipping.toFixed(2)}</p>
         </>
     )
 }
