@@ -7,7 +7,7 @@ import { Header } from '../components/Header'
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
 
-export const Feed = () => {
+export const Restaurants = () => {
     useProtectedPage()
     const { states, getters, setters } = useContext(GlobalContext)
     const { restaurants } = states

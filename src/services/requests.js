@@ -1,5 +1,5 @@
 import { APP_NAME, BASE_URL } from "../constants/urls"
-import { goToFeed, goToHome } from "../routes/coordinator"
+import { goToHome, goToRestaurants } from "../routes/coordinator"
 import axios from "axios"
 import { GlobalState } from "../global/GlobalState"
 import { useContext } from "react"
@@ -35,6 +35,7 @@ export const requestSignUp = (form, navigate, clear) => {
        localStorage.setItem("email", form.email)
        alert("Usuário cadastrado com sucesso!")
        goToHome(navigate)
+       console.log(res.data.message)
     })
     .catch((err) => {
         alert("Erro! Tente novamente.")
@@ -60,7 +61,7 @@ export const requestAddress = (form, navigate, clear) => {
     axios.put(`${BASE_URL}/${APP_NAME}/address`, body, headers)
     .then((res) =>{
         clear()
-        goToFeed(navigate)
+        goToRestaurants(navigate)
         // localStorage.setItem('token', res.data)
     })
     .catch((err)=>{
