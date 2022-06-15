@@ -4,8 +4,10 @@ import { useForm } from "../hooks/useForm";
 import { requestLogin } from "../services/requests";
 import logo from "../assets/img/logo.png";
 import { useUnprotectedPage } from "../hooks/useUnprotectedPage";
-import { goToFeed, goToSignUp } from "../routes/coordinator";
+import { goToAddress, goToFeed, goToSignUp } from "../routes/coordinator";
 import { Button, TextField } from "@mui/material";
+import { VisibilityOff } from "@mui/icons-material";
+import userEvent from "@testing-library/user-event";
 
 
 export const Login = () => {
@@ -17,7 +19,6 @@ export const Login = () => {
     const login = (e) => {
         e.preventDefault()
         requestLogin(form, navigate, clear)
-        goToFeed(navigate)
     }
 
     return(

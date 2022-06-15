@@ -1,7 +1,11 @@
+import { CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useContext } from "react";
 import { RestaurantCard } from "../components/RestaurantCard";
 import { GlobalContext } from "../global/GlobalContext";
 import { useProtectedPage } from "../hooks/useProtectedPage";
+import { Header } from '../components/Header'
+import { useNavigate } from "react-router-dom";
+import { Footer } from "../components/Footer";
 
 export const Feed = () => {
     useProtectedPage()
@@ -21,13 +25,20 @@ export const Feed = () => {
                 restaurant={restaurant}
             />
         )
-    }) : <p>Loading...</p>
+    }) : <CircularProgress style={{"color": "#5CB646"}}/>
 
 
     return(
         <>
-        <p> Sou feed </p>
+        <Header
+            title="FutureEats"
+        />
+        <Typography
+            
+        >Lista de restaurantes</Typography>
         {renderRestaurants}
+        <hr/>
+        <Footer/>
         </>
     )
 }

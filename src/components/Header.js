@@ -1,20 +1,23 @@
 import React from "react";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { IconButton, Typography } from "@mui/material";
+import { ArrowBackIos } from "@mui/icons-material";
 
-const HeaderContainer = styled.header`
-
-  p {
- text-align: center;
-  }
-`;
 
 export const Header = (props) => {
-  return (
-    <HeaderContainer>
-      <header>
-        {/* //Colocar icones */}
-        <p> {props.title} </p>
-      </header>
-    </HeaderContainer>
-  );
-};
+    const navigate = useNavigate()
+
+    const renderButton = { }
+
+    return(
+        <header>
+            {/* //Colocar icones */}
+            <Typography
+              variant="body1"
+            > {props.title} </Typography>
+
+            <IconButton onClick={() => navigate(-1)}><ArrowBackIos/></IconButton>
+            <hr/>
+        </header>
+    )
+} 

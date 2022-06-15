@@ -1,6 +1,9 @@
 import { APP_NAME, BASE_URL } from "../constants/urls"
-import { goToHome } from "../routes/coordinator"
+import { goToFeed, goToHome } from "../routes/coordinator"
 import axios from "axios"
+import { GlobalState } from "../global/GlobalState"
+import { useContext } from "react"
+import { GlobalContext } from "../global/GlobalContext"
 
 export const requestLogin = (form, navigate, clear) => {
     const body = {
@@ -12,7 +15,6 @@ export const requestLogin = (form, navigate, clear) => {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("email", form.email)
         alert("Login realizado!")
-        goToHome(navigate)
     })
     .catch((err) => {
         alert("Senha e/ou email inválidos! Tente novamente!")
@@ -41,6 +43,12 @@ export const requestSignUp = (form, navigate, clear) => {
 }
 
 export const requestAddress = (form, navigate, clear) => {
+
+    const headers = {
+        headers: {
+            auth: localStorage.getItem('token')
+        }
+    }
     const body = {
         street: form.street,
         number: form.number,
@@ -49,5 +57,13 @@ export const requestAddress = (form, navigate, clear) => {
         state: form.state,
         complement: form.complement,
     }
-    axios.put(`${BASE_URL}/${APP_NAME}/address`, body)
+    axios.put(`${BASE_URL}/${APP_NAME}/address`, body, headers)
+    .then((res) =>{
+        clear()
+        goToFeed(navigate)
+        // localStorage.setItem('token', res.data)
+    })
+    .catch((err)=>{
+        console.log(err.message)
+    })
 }
