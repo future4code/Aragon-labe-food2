@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import cart from '../assets/icons/cart.png'
 import avatar from '../assets/icons/avatar.png'
 import homepage from '../assets/icons/homepage.png'
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 export const Footer = () => {
     const navigate= useNavigate()
