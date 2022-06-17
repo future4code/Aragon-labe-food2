@@ -1,67 +1,77 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "../hooks/useForm";
-import { requestLogin } from "../services/requests";
 import logo from "../assets/img/logo.png";
 import { useUnprotectedPage } from "../hooks/useUnprotectedPage";
 import { goToAddress, goToSignUp } from "../routes/coordinator";
-import { Button, TextField } from "@mui/material";
-import { VisibilityOff } from "@mui/icons-material";
-import userEvent from "@testing-library/user-event";
+import { Button, IconButton, Input, InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import { InputOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { GlobalContext } from "../global/GlobalContext";
 
 
 export const Login = () => {
     useUnprotectedPage()
     const navigate = useNavigate()
     const { form, onChange, clear} = useForm({email:"", password:""})
+    const [isLoading, setIsLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const {requests} = useContext(GlobalContext)
+    const {requestLogin} = requests
 
 
-    const login = (e) => {
+    const submitLogin = (e) => {
         e.preventDefault()
-        requestLogin(form, navigate, clear)
-    //     // return addressToken !== null
-    // //   ? goToRestaurants(navigate)
-    // //   : goToSignUpAdressPage(navigate)
-    // }
+        requestLogin(form, navigate, setIsLoading)
+        clear()
+    }
 
-        // useEffect(() => {
-        //     const hasAdddress = 
-        //     if ( addressToken === true ) {
-        //         goToRestaurants(navigate)
-        //     } else {
-        //         goToAddress(navigate)
-        //     }
-        // })
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword)
     }
 
 
    return(
         <main>
         <img src={logo} width={"150px"} alt="logo"/>
-        <h2>LOGIN</h2>
-            <form onSubmit={login}>
-                <label htmlFor="email">E-mail: </label>
+        <p>Entrar</p>
+            <form onSubmit={submitLogin}>
                 <TextField
+                    label="E-mail"
                     id={'email'}
                     type={'email'}
                     name={'email'}
                     value={form.email}
                     onChange={onChange}
+                    placeholder="email@email.com"
+                    multiline
                     required
                 />
                 <br/>
-                <label htmlFor="password">Password:</label>
-                <TextField
+                <OutlinedInput
+                    label={"Senha"}
                     id={"password"}
-                    type={"password"}
+                    placeholder={"Senha"}
+                    type={showPassword? 'text' : 'password'}
                     name={"password"}
                     value={form.password}
                     onChange={onChange}
                     required
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleShowPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
                 <br/>
                 <Button 
                     variant="contained" 
+                    color="primary"
                     sx={{
                         margin: '0 2vw',
                         backgroundColor: '#5CB646', 
@@ -70,8 +80,8 @@ export const Login = () => {
                         type="submit">Log In</Button>
             </form>
             <section>
-                <h3>Don't have an account yet?</h3>
-                <Button sx={{textDecoration:'underline', color:'#000000'}} onClick={() => goToSignUp(navigate)}>Click Here</Button>
+                <h3>Não possui cadastro?</h3>
+                <Button sx={{textDecoration:'underline', color:'#000000'}} onClick={() => goToSignUp(navigate)}>Clique aqui.</Button>
             </section>
         </main>
     )

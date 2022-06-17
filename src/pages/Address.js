@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
 import { goToRestaurants } from "../routes/coordinator";
@@ -6,6 +6,7 @@ import { requestAddress } from "../services/requests";
 import { TextField, Button } from "@mui/material";
 import logo from "../assets/img/logo.png";
 import { useProtectedPage } from "../hooks/useProtectedPage";
+import { GlobalContext } from "../global/GlobalContext";
 
 export const Address = () => {
   useProtectedPage();
@@ -19,18 +20,20 @@ export const Address = () => {
     complement: "",
   });
 
-  const [ address, setAddress ] = useState(false)
+  const {states, requests} = useContext(GlobalContext)
+  const [isLoading,setIsLoading] = useState(false)
 
-  const registerAddress = (e) => {
-    e.preventDefault();
-    requestAddress(form, navigate, clear);   
-  };
+  const submitAddress = (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    requests.insertAddress(form, setIsLoading, navigate)
+  }
 
   return (
     <main>
       <img src={logo} width={"150px"} alt="logo" />
-      <h2>MEU ENDEREÇO</h2>
-      <form onSubmit={registerAddress}>
+      <p>Meu endereço</p>
+      <form onSubmit={submitAddress}>
         <TextField
           label={"Logradouro"}
           placeholder="Rua / Av."
@@ -106,7 +109,7 @@ export const Address = () => {
           }}
           type="submit"
         >
-          Save
+          Salvar
         </Button>
       </form>
       <section>
