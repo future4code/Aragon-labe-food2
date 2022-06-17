@@ -1,4 +1,4 @@
-import { CircularProgress, InputAdornment, OutlinedInput, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, InputAdornment, OutlinedInput, TextField, Typography } from "@mui/material";
 import React, { useEffect, useContext, useReducer } from "react";
 import { RestaurantCard } from "../components/RestaurantCard";
 import { GlobalContext } from "../global/GlobalContext";
@@ -11,7 +11,11 @@ import { BASE_URL } from "../constants/urls";
 import { categories } from "../constants/categories";
 import { goToRestaurantDetails } from "../routes/coordinator";
 import { Search, SearchSharp } from "@mui/icons-material";
+import styled from "styled-components";
 
+const Main = styled.div`
+    overflow-x: hidden;
+`
 
 export const Restaurants = () => {
     useProtectedPage()
@@ -54,10 +58,10 @@ export const Restaurants = () => {
 
     const mapCategories = categories.map((category, index) => {
         return (
-            <a 
+            <Button
             key={index} 
             href={`#${category}`}
-            onClick={()=> filterByCategory(category)}>{category}</a>
+            onClick={()=> filterByCategory(category)}>{category}</Button>
         )
     })
 
@@ -73,12 +77,13 @@ export const Restaurants = () => {
       ) : (<p>Selecione uma categoria para começar!</p>)
 
     return(
-        <>
+        <Main>
         <Header
             title="FutureEats"
         />
         <section>
         <OutlinedInput
+          fullWidth
           type="text"
           onChange={filterByName}
           placeholder="Procurar"
@@ -96,6 +101,6 @@ export const Restaurants = () => {
         {mapRestaurants}
         <hr/>
         <Footer/>
-        </>
+        </Main>
     )
 }

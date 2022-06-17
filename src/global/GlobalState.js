@@ -13,6 +13,7 @@ export const GlobalState = (props) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || [])
     const [restaurantsList, setRestaurantsList] = useState([]);
     const [filterList, setFilterList] = useState(restaurantsList);
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || [])
 
     const requestLogin = (body, navigate, setIsLoading) => {
         login(body, navigate, setIsLoading, setUser)
@@ -26,8 +27,8 @@ export const GlobalState = (props) => {
         addAddress(body, setIsLoading, setUser, navigate)
     }
 
-    const states = {user, restaurantsList, filterList}
-    const setters = {setUser, setRestaurantsList, setFilterList}
+    const states = {user, restaurantsList, filterList, cart}
+    const setters = {setUser, setRestaurantsList, setFilterList, setCart}
     const requests ={requestLogin, requestSignup, insertAddress}
 
     
