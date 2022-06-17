@@ -1,70 +1,88 @@
-import { APP_NAME, BASE_URL } from "../constants/urls"
-import { goToAddress, goToRestaurants } from "../routes/coordinator"
+import { BASE_URL } from "../constants/urls"
+
 import axios from "axios"
-import { GlobalState } from "../global/GlobalState"
-import { useContext } from "react"
-import { GlobalContext } from "../global/GlobalContext"
 
-export const requestLogin = (form, navigate, clear) => {
-    const body = {
-        email: form.email,
-        password: form.password
-    }
-    axios.post(`${BASE_URL}/${APP_NAME}/login`, body)
+
+export const login = (body, navigate, setIsLoading, setState) => {
+    const url = `${BASE_URL}/login`
+
+    axios
+    .post(url, body)
     .then((res) => {
-        localStorage.setItem("token", res.data.token)
-        localStorage.setItem("email", form.email)
-        alert("Login realizado!")
-    })
-    .catch((err) => {
-        alert("Senha e/ou email inválidos! Tente novamente!")
-        clear()
+        localStorage.setItem('token', res.data.token)
+        setState(res.data.user)
+        setIsLoading(false)
+        navigate('/restaurants')
+    }).catch((err) => {
+        alert(err.response.data.message)
+        setIsLoading(false)
     })
 }
 
-export const requestSignUp = (form, navigate, clear) => {
-    const body = {
-        name: form.name,
-        email: form.email,
-        cpf: form.cpf,
-        password: form.password
-    }
-    console.log(form)
-    axios.post(`${BASE_URL}/${APP_NAME}/signup`, body)
-    .then((res) => {
-       localStorage.setItem("token", res.data.token)
-       localStorage.setItem("email", form.email)
-       alert("Usuário cadastrado com sucesso!")
-       goToAddress(navigate)
-    })
-    .catch((err) => {
-        alert("Erro! Tente novamente.")
-        clear()
+export const signUp = (body, setter, navigate, setIsLoading) => {
+
+    const url = `${BASE_URL}/signup`
+
+    axios
+    .post(url, body)
+    .then(res => {
+        localStorage.setItem('token', res.data.token)
+
+        setter(res.data.user)
+        navigate('/address')
+        setIsLoading(false)
+
+    }).catch(err => {
+        setIsLoading(false)
+        alert(err.response.data.message)
     })
 }
 
-export const requestAddress = (form, navigate) => {
-
+export const addAddress = (body, setIsLoading, setUser, navigate) => {
+    const url = `${BASE_URL}/address`
+    const token = localStorage.getItem('token')
     const headers = {
         headers: {
-            auth: localStorage.getItem('token')
+            auth:token
         }
     }
-    const body = {
-        street: form.street,
-        number: form.number,
-        neighbourhood: form.neighbourhood,
-        city: form.city,
-        state: form.state,
-        complement: form.complement,
-    }
-    axios.put(`${BASE_URL}/${APP_NAME}/address`, body, headers)
-    .then((res) =>{
+
+    axios
+    .put(url, body, headers)
+    .then((res) => {
         localStorage.setItem('token', res.data.token)
-        alert("Endereço cadastrado com sucesso")
-        goToRestaurants(navigate)
+        setUser(res.data.user)
+        setIsLoading(false)
+        alert("Endereço atualizado com sucesso!")
+        navigate('/restaurants', { replace: true })
+    }).catch(err => {
+        alert(err.response.data.message)
+        setIsLoading(false)
     })
-    .catch((err)=>{
-        console.log(err.message)
-    })
+
 }
+// export const requestAddress = (form, navigate) => {
+
+//     const headers = {
+//         headers: {
+//             auth: localStorage.getItem('token')
+//         }
+//     }
+//     const body = {
+//         street: form.street,
+//         number: form.number,
+//         neighbourhood: form.neighbourhood,
+//         city: form.city,
+//         state: form.state,
+//         complement: form.complement,
+//     }
+//     axios.put(`${BASE_URL}/${APP_NAME}/address`, body, headers)
+//     .then((res) =>{
+//         localStorage.setItem('token', res.data.token)
+//         alert("Endereço cadastrado com sucesso")
+//         goToRestaurants(navigate)
+//     })
+//     .catch((err)=>{
+//         console.log(err.message)
+//     })
+// }

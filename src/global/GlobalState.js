@@ -3,57 +3,38 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "./GlobalContext";
 import { APP_NAME, BASE_URL } from "../constants/urls";
 import axios from "axios"
-import { goToSignUp, goToFeed, goToAddress } from "../routes/coordinator";
+import { login, signUp, addAddress } from "../services/requests";
 
 
 
 export const GlobalState = (props) => {
+
     //states
-    const [ restaurants, setRestaurants ] = useState([])
-    const [ isLoading, setIsLoading] = useState(false)
-    const [ profile, setProfile ] = useState({})
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || [])
+    const [restaurantsList, setRestaurantsList] = useState([]);
+    const [filterList, setFilterList] = useState(restaurantsList);
 
-    const getRestaurants = () => {
-        const headers = {
-            headers: {
-                auth: localStorage.getItem("token")
-            }
-        }
-        axios
-        .get(`${BASE_URL}/${APP_NAME}/restaurants`, headers)
-        .then((res) => {
-            setRestaurants(res.data.restaurants)
-        })
-        .catch((err) => {
-            alert("Error! Can't load the restaurants list")
-        })
+    const requestLogin = (body, navigate, setIsLoading) => {
+        login(body, navigate, setIsLoading, setUser)
     }
 
-    const getProfile = () => {
-        const headers = {
-            headers: {
-                auth: localStorage.getItem("token")
-            }
-        }
-        axios
-        .get(`${BASE_URL}/${APP_NAME}/profile`, headers)
-        .then((res) => {
-            setProfile(res.data)
-        })
-        .catch((err) => {
-            alert("Error! Can't load profile")
-        })
+    const requestSignup = (body, navigate, setIsLoading) => {
+        signUp(body, setUser, navigate, setIsLoading)
     }
 
+    const insertAddress = (body, setIsLoading, navigate) => {
+        addAddress(body, setIsLoading, setUser, navigate)
+    }
 
+    const states = {user, restaurantsList, filterList}
+    const setters = {setUser, setRestaurantsList, setFilterList}
+    const requests ={requestLogin, requestSignup, insertAddress}
 
-    const states = { restaurants, isLoading, profile }
-    const setters = { setRestaurants,setIsLoading, setProfile } 
-    const getters = { getRestaurants, getProfile }
+    
 
 
     return(
-        <GlobalContext.Provider value={{states, setters, getters}}>
+        <GlobalContext.Provider value={{states, setters, requests}}>
             {props.children}
         </GlobalContext.Provider>
     )
