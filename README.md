@@ -6,6 +6,9 @@ A aplicação é capaz de registrar um usuário, realizar login, verificar a exi
 Ainda na fase de implementação, estão a construção do carrinho para pedido e perfil do usuário.
 
 A documentação do banco de dados utilizado pode ser acessada no [link](https://documenter.getpostman.com/view/7549981/SWTEdGtT#3ca41feb-3e6c-4b75-91e8-54cf1e363c2c).
+
+## Link surge
+A aplicação pode ser acessada através do [link](https://future-eats-aragon2.surge.sh)
 ## Autores
 
 - [Geovana Oliveira](https://github.com/geovanaolis)
@@ -21,8 +24,6 @@ A documentação do banco de dados utilizado pode ser acessada no [link](https:/
 **libs:** axios, styled-components, react-router-dom
 
 **Design-System:** [MUI](https://mui.com/)
-
-
 
 
 ## Referência
